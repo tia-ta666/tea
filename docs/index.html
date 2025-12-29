@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奶茶产品信息查询</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #4CAF50;
+        }
+
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .product-list {
+            margin-top: 20px;
+        }
+
+        .product-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .product-info {
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .product-date {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .qr-section {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .qr-section img {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 10px;
+        }
+
+        .view-btn {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>奶茶产品信息查询系统</h1>
+            <p>扫描二维码查看产品详细信息</p>
+        </div>
+
+        <div id="product-list" class="product-list">
+            <p>正在加载产品信息...</p>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 奶茶产品信息查询系统</p>
+            <p>更新时间: <span id="update-time">--</span></p>
+        </div>
+    </div>
+
+    <script>
+        // 加载产品数据
+        async function loadProducts() {
+            try {
+                const response = await fetch('data/products.json');
+                const products = await response.json();
+
+                // 更新更新时间
+                if (products.length > 0) {
+                    document.getElementById('update-time').textContent = products[0].生成时间;
+                }
+
+                // 显示产品列表
+                displayProducts(products);
+
+            } catch (error) {
+                console.error('加载数据失败:', error);
+                document.getElementById('product-list').innerHTML = 
+                    '<p style="color: red; text-align: center;">加载数据失败，请刷新页面</p>';
+            }
+        }
+
+        function displayProducts(products) {
+            const container = document.getElementById('product-list');
+
+            if (products.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666;">暂无产品数据</p>';
+                return;
+            }
+
+            let html = '';
+
+            products.forEach(product => {
+                html += `
+                <div class="product-item">
+                    <div class="product-info">
+                        <div class="product-name">${product.商品名称}</div>
+                        <div class="product-date">
+                            生产日期: ${product.生产日期} | 保质期: ${product.保质期}
+                        </div>
+                    </div>
+                    <div class="qr-section">
+                        <img src="qrcodes/${product.二维码文件}" alt="二维码">
+                        <br>
+                        <a href="products/${product.页面文件}" class="view-btn" target="_blank">
+                            查看详情
+                        </a>
+                    </div>
+                </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // 页面加载时执行
+        document.addEventListener('DOMContentLoaded', loadProducts);
+    </script>
+</body>
+</html>
