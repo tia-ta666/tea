@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>红豆奶茶 - 产品详情</title>
+    <title>红豆奶茶 - 产品信息</title>
     <style>
         * {
             margin: 0;
@@ -14,144 +14,111 @@
         body {
             font-family: 'Microsoft YaHei', Arial, sans-serif;
             background: #f5f5f5;
-            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 20px;
         }
 
         .container {
-            max-width: 400px;
             width: 100%;
+            max-width: 400px;
             background: white;
             border-radius: 10px;
             padding: 30px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .product-title {
             text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #4CAF50;
         }
 
-        .back-btn {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #4CAF50;
-            text-decoration: none;
-            font-size: 0.9em;
-        }
-
-        .product-header {
-            margin-bottom: 25px;
-        }
-
-        .product-header h1 {
+        .product-title h1 {
             color: #333;
-            margin-bottom: 15px;
-            font-size: 1.5em;
+            font-size: 1.8em;
         }
 
-        .info-section {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 25px;
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
 
-        .info-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
+        .info-table tr {
             border-bottom: 1px solid #eee;
         }
 
-        .info-item:last-child {
+        .info-table tr:last-child {
             border-bottom: none;
         }
 
         .info-label {
+            padding: 15px 10px;
             color: #666;
-            text-align: left;
-            flex: 1;
+            width: 40%;
+            font-weight: 600;
         }
 
         .info-value {
+            padding: 15px 10px;
             color: #333;
             font-weight: bold;
             text-align: right;
-            flex: 1;
         }
 
-        .qr-display {
-            margin: 25px 0;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
         }
 
-        .qr-display img {
-            width: 180px;
-            height: 180px;
-            margin-bottom: 15px;
+        .back-link a {
+            color: #4CAF50;
+            text-decoration: none;
         }
 
-        .status-badge {
-            display: inline-block;
-            background: #4CAF50;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 15px;
-            font-size: 0.9em;
-        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
 
-        .scan-hint {
-            color: #666;
-            font-size: 0.9em;
-            margin-top: 10px;
-        }
+            .product-title h1 {
+                font-size: 1.5em;
+            }
 
-        .footer {
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-            color: #666;
-            font-size: 0.85em;
+            .info-label, .info-value {
+                padding: 12px 8px;
+                font-size: 0.95em;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-btn">← 返回产品列表</a>
-
-        <div class="product-header">
+        <div class="product-title">
             <h1>红豆奶茶</h1>
         </div>
 
-        <div class="info-section">
-            <div class="info-item">
-                <div class="info-label">商品名称</div>
-                <div class="info-value">红豆奶茶</div>
-            </div>
+        <table class="info-table">
+            <tr>
+                <td class="info-label">商品名称</td>
+                <td class="info-value">红豆奶茶</td>
+            </tr>
+            <tr>
+                <td class="info-label">生产日期</td>
+                <td class="info-value">2025年11月17日</td>
+            </tr>
+            <tr>
+                <td class="info-label">保质期限</td>
+                <td class="info-value">12个月</td>
+            </tr>
+        </table>
 
-            <div class="info-item">
-                <div class="info-label">生产日期</div>
-                <div class="info-value">2025年11月17日</div>
-            </div>
-
-            <div class="info-item">
-                <div class="info-label">保质期限</div>
-                <div class="info-value">12个月</div>
-            </div>
-        </div>
-
-        <div class="qr-display">
-            <img src="../qrcodes/013_红豆奶茶.png" alt="产品二维码">
-            <div class="status-badge">✓ 产品信息已验证</div>
-            <p class="scan-hint">使用微信扫一扫查看产品信息</p>
-        </div>
-
-        <div class="footer">
-            <p>生成时间: 2025-12-29 12:37:00</p>
-            <p>© 2024 奶茶产品信息查询系统</p>
+        <div class="back-link">
+            <a href="../index.html">← 返回产品列表</a>
         </div>
     </div>
 </body>
